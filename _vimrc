@@ -1,26 +1,13 @@
 "============================================================================
 "     FileName: _vimrc
-"         Desc: This is Liuchao's configration
-"       Author: Liuchao
+"         Desc: This is LChao's configration
+"       Author: LChao
 "        Email: chao0207@live.com
-"     HomePage: http://blog.sina.com.cn/liuchao0207
+"     HomePage: http://weibo.com/chao0207/
 "      Version: c.0.1
 "   CreateTime: 2015-07-27 16:10:30
-"   LastChange: 2015-09-30 10:45:33
+"   LastChange: 2015-12-22 09:33:32
 "      History: 
-"               c.0.1:
-"                   --vimµÄÒ»Ğ©»ù±¾ÅäÖÃ£¬ÀıÈçÏÔÊ¾ĞĞºÅ£¬±³¾°ÅäÉ«£¬Æô¶¯×î´ó
-"                       »¯ÖĞÎÄ±àÂë£¬ÎŞ²Ëµ¥À¸¹¤¾ßÀ¸µÈµÈ
-"                   --Ìí¼ÓTlistÁĞ±í£¬ÅäºÏCtags²å¼şÀ´Ê¹ÓÃ£¬ÉèÖÃÆäÏà¹ØÅäÖÃ£¬
-"                       ÀıÈçËævim¿ªÆô¶ø¿ªÆô£¬´°¿Ú¿í¶È£¬¿ì½İ¼üµÈµÈ
-"                   --Ìí¼ÓNERDTree£¬ÉèÖÃÆäÏà¹ØÅäÖÃ£¬ÀıÈçËævim¿ªÆô¶ø¿ªÆô£¬
-"                       ¿ó¿Ú¿í¶È£¬¿ì½İ¼üµÈµÈ
-"                   --Ìí¼ÓÈ«ÆÁgvimfullscreen²å¼ş£¬Ó³Éä¼üF11
-"                   --Ìí¼Ójquery¼°htmlÏà¹Ø»ù±¾ÅäÖÃ
-"                   --Ìí¼Ó×Ô¶¯Ìí¼Ó×÷ÕßĞÅÏ¢AuthorInfo²å¼ş£¬ÅäºÏNERD_commen
-"                       -terÀ´Ê¹ÓÃ
-"                   --Ìí¼Ójava×Ô¶¯ÌáÊ¾javacomplete²å¼ş£¬java´úÂë×Ô¶¯ÌáÊ¾£¬
-"                       Ctrl+n,pÌáÊ¾£¬'.'ÌáÊ¾µÈµÈ
 "============================================================================
 
 set nocompatible
@@ -30,31 +17,31 @@ behave mswin
 
 set diffexpr=MyDiff()
 function MyDiff()
-let opt = '-a --binary '
-  
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  let eq = ''
-  if $VIMRUNTIME =~ ' '
-    if &sh =~ '\<cmd'
-      let cmd = '""' . $VIMRUNTIME . '\diff"'
-      let eq = '"'
+    let opt = '-a --binary '
+
+    if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+    if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+    let arg1 = v:fname_in
+    if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+    let arg2 = v:fname_new
+    if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+    let arg3 = v:fname_out
+    if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+    let eq = ''
+    if $VIMRUNTIME =~ ' '
+        if &sh =~ '\<cmd'
+            let cmd = '""' . $VIMRUNTIME . '\diff"'
+            let eq = '"'
+        else
+            let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+        endif
     else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+        let cmd = $VIMRUNTIME . '\diff'
     endif
-  else
-    let cmd = $VIMRUNTIME . '\diff'
-  endif
-  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+    silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
 
-"========================ÅĞ¶Ïµ±Ç°ÏµÍ³µÄÀàĞÍ===============================
+"==============================åˆ¤æ–­å½“å‰ç³»ç»Ÿçš„ç±»å‹=========================
 if(has("win32") || has("win95") || has("win64") || has("win16"))
     let g:vimrc_iswindows=1
 else
@@ -62,80 +49,140 @@ else
 endif
 autocmd BufEnter * lcd %:p:h
 
-"set fenc=utf-8
+"==============================åˆ¤æ–­å½“å‰ç»ˆç«¯çš„ç±»å‹=========================
+if has ('gui_running')
+    let g:isGUI=1
+else
+    let g:isGUI=0
+endif
+
+"colorscheme Tomorrow-Night-Eighties "Tomorrow-Night-Eighties
+
+"if has ('gui_running')
+"    set background=light           "http://weibo.com/chao0207/
+"else
+"    set background=dark
+"endif
+"let g:solarized_termcolors=256
+"colorscheme solarized
+
+let g:molokai_original=0
+colorscheme molokai
+
+set regexpengine=1                  "vim-javascript
+
 syntax enable
-syntax on					"×Ô¶¯Óï·¨¸ßÁÁ
-colorscheme Tomorrow-Night-Eighties "desert Tomorrow-Night-Eighties ÅäÉ«
-set number					"ÏÔÊ¾ĞĞºÅ
+syntax on					"è‡ªåŠ¨è¯­æ³•é«˜äº®
+set number
 set history=1000
-au GUIEnter * simalt ~x     "Æô¶¯Ê±×î´ó»¯
+au GUIEnter * simalt ~x     "å¯åŠ¨æ—¶æœ€å¤§åŒ–
 
+filetype indent on           " é’ˆå¯¹ä¸åŒçš„æ–‡ä»¶ç±»å‹é‡‡ç”¨ä¸åŒçš„ç¼©è¿›æ ¼å¼
+filetype plugin on           " é’ˆå¯¹ä¸åŒçš„æ–‡ä»¶ç±»å‹åŠ è½½å¯¹åº”çš„æ’ä»¶
+filetype plugin indent on    " å¯ç”¨è‡ªåŠ¨è¡¥
 filetype on 
-filetype indent on          "Õë¶Ô²»Í¬µÄÎÄ¼şÀàĞÍ²ÉÓÃ²»Í¬µÄËõ½ø¸ñÊ½
-filetype plugin on          "Õë¶Ô²»Í¬µÄÎÄ¼şÀàĞÍ¼ÓÔØ¶ÔÓ¦µÄ²å¼ş
-filetype plugin indent on   "ÆôÓÃ×Ô¶¯²¹
 
-" Ëõ½ø
-set autoindent              "°Ñµ±Ç°ĞĞµÄ¶ÔÆë·½Ê½Ó¦ÓÃµ½ÏÂÒ»ĞĞ
-set smartindent             "ÖÇÄÜµÄÑ¡Ôñ¶ÔÆë·½Ê½
-set tabstop=4				"Éè¶¨ tab ³¤¶ÈÎª 4
-set shiftwidth=4            "½«»»ĞĞµÄ×Ü¶¯Ëõ½øÉèÖÃ³É4¸ö¿Õ¸ñ
-set showmatch               "¸ßÁÁÏÔÊ¾
-set cursorline              "Í»³öÏÔÊ¾µ±Ç°ĞĞ
-set cuc                     "Êú×´Í»³öÏÔÊ¾
-set expandtab               "¿Õ¸ñ´úÌætab
-"set guioptions-=T          "Òş²Ø¹¤¾ßÀ¸
-"set guioptions-=m          "Òş²Ø²Ëµ¥À¸
-set ruler					"´ò¿ª×´Ì¬À¸±ê³ß
-set nohls                   "¹Ø±ÕÆ¥ÅäµÄ¸ßÁÁÏÔÊ¾
-set incsearch				"ÊäÈëËÑË÷ÄÚÈİÊ±¾ÍÏÔÊ¾ËÑË÷½á¹û
-set nowrapscan              "²éÕÒµ½Ä©Î²Í£Ö¹²éÕÒ
-set autochdir               "×Ô¶¯ÇĞ»»µ±Ç°Ä¿Â¼Îªµ±Ç°ÎÄ¼şËùÔÚµÄÄ¿Â¼
-set magic                   "ÉèÖÃÄ§Êõ
-set nobackup                "È¡Ïû×Ô¶¯±¸·İ
+set autoindent
+set smartindent
+set tabstop=4
+set shiftwidth=4
+set showmatch
+set cursorline
+set cuc
+set expandtab
+"set guioptions-=T
+"set guioptions-=m
+set ruler
+set nohls
+set incsearch
+set nowrapscan
+set autochdir
+set magic
+set nobackup
 
-"set nofoldenable           "¿ªÊ¼ÕÛµş
-"set foldclose=all          "ÉèÖÃ¹â±êÒÆ¿ªÊ±×Ô¶¯¹Ø±ÕÕÛµş
-"set foldlevel=100          "Æô¶¯vimÊ±²»Òª×Ô¶¯ÕÛµş´úÂë
-set foldmethod=indent       "ÉèÖÃÕÛµş·½Ê½
-set foldcolumn=0            "ÉèÖÃÕÛµşÇøÓòµÄ¿í¶È
-setlocal foldlevel=99       "ÉèÖÃÕÛµş²ãÊıÎª
-set foldopen=all            "ÉèÖÃ¹â±êµ½´ïÊ±×Ô¶¯´ò¿ªÕÛµş
+"set nofoldenable
+"set foldclose=all
+"set foldlevel=100
+"set foldmethod=indent
+"set foldcolumn=0
+"setlocal foldlevel=2
+"set foldopen=all
+
+filetype off  
+
+" æ­¤å¤„è§„å®šVundleçš„è·¯å¾„  
+
+set rtp+=$VIM/vimfiles/bundle/vundle/  
+
+call vundle#rc('$VIM/vimfiles/bundle/')  
+
+Bundle 'gmarik/vundle'  
+
+" original repos on github  
+
+Bundle 'bling/vim-airline'
+Bundle 'vim-airline/vim-airline-themes'
+Bundle 'mattn/webapi-vim'
+Bundle 'Wildog/airline-weather.vim'
+Bundle 'Zuckonit/vim-airline-tomato'
+Bundle 'mattn/zencoding-vim'  
+Bundle 'mattn/emmet-vim'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
+Bundle 'Yggdroot/indentLine'
+Bundle 'tomasr/molokai'
+Bundle 'HTML-AutoCloseTag'
+Bundle 'elzr/vim-json'
+Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'ap/vim-css-color'
+Bundle 'nono/jquery.vim'
+Bundle 'jiangmiao/auto-pairs'
+
+" vim-scripts repos  
+
+Bundle 'taglist.vim'
+Bundle "vim-scripts/AuthorInfo"
+Bundle "vim-scripts/javacomplete"
+Bundle "vim-scripts/javabrowser"
+
+filetype plugin indent on " required!
 
 "-------------------------------------------------------------------------
-" Ctrl + C Ò»¼ü±£´æ¡¢±àÒë
+" Ctrl + C ä¸€é”®ä¿å­˜ã€ç¼–è¯‘
 "map <c-c> :call CompileRun()<CR>
 "imap <c-c> <ESC>:call CompileRun()<CR>
 "vmap <c-c> <ESC>:call CompileRun()<CR>
-" F5 Ò»¼ü±£´æ¡¢ÔËĞĞ
+" F5 ä¸€é”®ä¿å­˜ã€è¿è¡Œ
 map <F5> :call RunCode()<CR>
 imap <F5> <ESC>:call RunCode()<CR>
 vmap <F5> <ESC>:call RunCode()<CR>
 
-"===========================´ò¿ªNERDTRee==================================
-map <F7> :NERDTree<CR>
-"let NERDTreeWinPos=1       "´°¿Ú¿¿ÓÒ
-"C,C++µÄµ÷ÊÔ
+"C,C++çš„è°ƒè¯•
 map <F8> :call Debug()<CR>
-"vimÆô¶¯×Ô¶¯¿ªÆôNERDTree
+
+"==============================NERDTree setting===========================
+map <F7> :NERDTree<CR>
+"let NERDTreeWinPos=1
+
 autocmd VimEnter * NERDTree
-"Æô¶¯ºó×Ô¶¯½øÈë±à¼­Çø
+
 wincmd w
 autocmd VimEnter * wincmd w
-"ÉèÖÃ´°¿Ú³ß´ç"
+
 let NERDTreeWinSize=25
-"ÊÇ·ñÏÔÊ¾ĞĞºÅ"
+
 let NERDTreeShowLineNumbers=1
-"ÊÇ·ñÏÔÊ¾ÊéÇ©"
+
 let NERDTreeShowBookmarks=1 
-"¸ßÁÁNERDTrre´°¿ÚµÄµ±Ç°ĞĞ"
+
 let NERDTreeHighlightCursorline=1
 
-"TabÖ®¼äµÄÇĞ»»
+"TABé¡µç­¾
 map <F9> gt
+
+"è¿è¡Œ ç¼–è¯‘
 map <F10> :!cls&&javac %&&java %:r <CR>
 
-" ÔËĞĞ¿ÉÖ´ĞĞÎÄ¼ş
 func! RunCode()
     exec "w"
     if &filetype == "c" 
@@ -151,97 +198,187 @@ func! RunCode()
     endif
 endfunc
 
-"¶¨ÒåDebugº¯Êı£¬ÓÃÀ´µ÷ÊÔ³ÌĞò
 func Debug()
-exec "w"
-"C³ÌĞò
-if &filetype =='c'
-exec "!gcc % -g -o %<.exe"
-exec "!gdb %<.exe"
-elseif &filetype == 'cpp'
-exec "!g++ % -g -o %<.exe"
-exec "!gdb %<.exe"
-"Java³ÌĞò 
-elseif &filetype == 'java' 
-exec "!javac %" 
-exec "!jdb %<"
-endif
+    exec "w"
+
+    if &filetype =='c'
+        exec "!gcc % -g -o %<.exe"
+        exec "!gdb %<.exe"
+    elseif &filetype == 'cpp'
+        exec "!g++ % -g -o %<.exe"
+        exec "!gdb %<.exe"
+
+    elseif &filetype == 'java' 
+        exec "!javac %" 
+        exec "!jdb %<"
+    endif
 endfunc
-"½áÊø¶¨ÒåDebug
-"-------------------------------------------------------------------------
+
 
 set encoding=utf-8
-" ÉèÖÃ×ÖÌå ÒÔ¼°ÖĞÎÄÖ§³Ö
+
 if has("win32")
-    set guifont=Consolas:h12:cANSI
-	set fileencoding=chinese
-"------------------------------È«ÆÁ²å¼ş-----------------------------------
-	map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>   "·Ç²åÈëÄ£Ê½ÏÂF11È«ÆÁ
-	imap <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>   "²åÈëÄ£Ê½ÏÂF11È«ÆÁ
-	let g:vimrc_iswindows=1
-	let g:iswindows=1
-	let $VIMFILES = $VIM
+    "set guifont=Consolas:h12:cANSI
+    "set guifont=Source_Code_Pro_Light:h10:cANSI
+    set guifont=Meslo_LG_M_for_Powerline:h10:cANSI
+    set fileencoding=chinese
+
+    map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
+    imap <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
+    let g:vimrc_iswindows=1
+    let g:iswindows=1
+    let $VIMFILES = $VIM
 else
-	let $VIMFILES = $HOME/.vim
-	
+    let $VIMFILES = $HOME/.vim
+
 endif
 autocmd BufEnter * lcd %:p:h
 
-"½â¾ö²Ëµ¥ÂÒÂë   
+"è§£å†³èœå•ä¹±ç    
 source $VIMRUNTIME/delmenu.vim   
 source $VIMRUNTIME/menu.vim  
-"½â¾öconsleÊä³öÂÒÂë  
+"è§£å†³consleè¾“å‡ºä¹±ç   
 language messages zh_CN.utf-8
 
-
-" ×´Ì¬À¸ÏÔÊ¾Ä¿Ç°ËùÖ´ĞĞµÄÖ¸Áî
 set showcmd
-set go=	                    "ÎŞ²Ëµ¥À¸£¬¹¤¾ßÀ¸
-set laststatus=2            "¿ªÆô×´Ì¬À¸ĞÅÏ¢
+set go=
+set laststatus=2
 
-"==========================Ìí¼Ó×÷ÕßĞÅÏ¢===================================
-"AuthorInfoDetect   ×Ô¶¯Ìí¼Ó×÷Õß¡¢Ê±¼äµÈĞÅÏ¢£¬±¾ÖÊÊÇNERD_commenter && authorinfoµÄ½áºÏ
+"====== :AuthorInfoDetect   è‡ªåŠ¨æ·»åŠ ä½œè€…ã€æ—¶é—´ç­‰ä¿¡æ¯ï¼Œæœ¬è´¨æ˜¯NERD_commenter && authorinfoçš„ç»“åˆ
 let g:vimrc_author='Liuchao'
 let g:vimrc_email='chao0207@live.com'
-let g:vimrc_homepage='http://blog.sina.com.cn/liuchao0207'
+let g:vimrc_homepage='http://weibo.com/chao0207/'
 nmap <F4> :AuthorInfoDetect<cr>
 
-"===========================javaÉèÖÃ======================================
+"===========================javaè®¾ç½®========================================
 setlocal omnifunc=javacomplete#Complete
 let JavaBrowser_Ctags_Cmd='ctags'
 let Javabrowser_Use_Icon = 1
 let JavaBrowser_Use_Highlight_Tag = 1
-autocmd Filetype java set omnifunc=javacomplete#Complete "ÕâÒ»¾äÊÇ×Ô¶¯²¹È«
-autocmd Filetype java set completefunc=javacomplete#CompleteParamsInfo "ÕâÒ»¾äÊÇ²ÎÊıÌáÊ¾
-inoremap <buffer> <C-X><C-U> <C-X><C-U><C-P> 
+autocmd Filetype java set omnifunc=javacomplete#Complete
+autocmd Filetype java set completefunc=javacomplete#CompleteParamsInfo
+inoremap <buffer> <C-X><C-U> <C-X><C-U><C-P>
 inoremap <buffer> <C-S-Space> <C-X><C-U><C-P>
 
 autocmd Filetype java inoremap <buffer> . .<C-X><C-O><C-P><Down>
-autocmd Filetype java inoremap <expr> <CR> pumvisible()?"\<C-Y>":"<CR>"  "Èç¹û»Ø³µ²»¹ÜÓÃ£¬Ìí¼Ó¸Ã¾ä
+autocmd Filetype java inoremap <expr> <CR> pumvisible()?"\<C-Y>":"<CR>"
 
-"========================½øĞĞTlistµÄÉèÖÃ==================================
-"TlistUpdate¿ÉÒÔ¸üĞÂtags
+"========================è¿›è¡ŒTlistçš„è®¾ç½®=================================
 map <F3> :silent! Tlist<CR>
-let Tlist_Ctags_Cmd='ctags' "ÒòÎªÎÒÃÇ·ÅÔÚ»·¾³±äÁ¿Àï£¬ËùÒÔ¿ÉÒÔÖ±½ÓÖ´ĞĞ
-let Tlist_Use_Right_Window=1        "ÈÃ´°¿ÚÏÔÊ¾ÔÚÓÒ±ß£¬0µÄ»°¾ÍÊÇÏÔÊ¾ÔÚ×ó±ß
-let Tlist_Show_One_File=0   "ÈÃtaglist¿ÉÒÔÍ¬Ê±Õ¹Ê¾¶à¸öÎÄ¼şµÄº¯ÊıÁĞ±í£¬Èç¹ûÏëÖ»ÓĞ1¸ö£¬ÉèÖÃÎª1
-let Tlist_WinWidth=25       "ÉèÖÃ¿í¶È
-let Tlist_File_Fold_Auto_Close=1    "·Çµ±Ç°ÎÄ¼ş£¬º¯ÊıÁĞ±íÕÛµşÒş²Ø
-let Tlist_Exit_OnlyWindow=1 "µ±taglistÊÇ×îºóÒ»¸ö·Ö¸î´°¿ÚÊ±£¬×Ô¶¯ÍÆ³övim
-let Tlist_Process_File_Always=0     "ÊÇ·ñÒ»Ö±´¦Àítags.1:´¦Àí;0:²»´¦Àí¡£²»ÊÇÒ»Ö±ÊµÊ±¸üĞÂtags£¬ÒòÎªÃ»ÓĞ±ØÒª
+let Tlist_Ctags_Cmd='ctags'
+let Tlist_Use_Right_Window=1
+let Tlist_Show_One_File=0
+let Tlist_WinWidth=25
+let Tlist_File_Fold_Auto_Close=1
+let Tlist_Exit_OnlyWindow=1
+let Tlist_Process_File_Always=0
 let Tlist_Inc_Winwidth=0
-let Tlist_Auto_Open=1
+"let Tlist_Auto_Open=1
 
-"=============================jqueryÅäÉ«==================================
-au BufRead,BufNewFile *.js set syntax=jquery
-let b:javascript_fold=1                 "´ò¿ªjavascriptÕÛµş
-let javascript_enable_domhtmlcss=1      "´ò¿ªjavascript¶Ôdom¡¢htmlºÍcssµÄÖ§³Ö
+"=============jqueryé…è‰² jsç­‰é…ç½®=============
+au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
+let b:javascript_fold=1
+let javascript_enable_domhtmlcss=1
 
-"============================htmlËõ½øÉèÖÃ=================================
 let g:html_indent_script1 = "inc" 
 let g:html_indent_style1 = "inc"
 let g:html_indent_inctags = "html,body,head,tbody"
 
-"=============================CtagsÉèÖÃ===================================
+let g:html5_aria_attributes_complete=0
+let g:html5_microdata_attributes_complete=0
+let g:html5_rdfa_attributes_complete=0
+let g:html5_event_handler_attributes_complete=0
+
+autocmd FileType python set omnifunc=pythoncomplete#Complete        "pythonè¡¥å…¨
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS      "jsè¡¥å…¨
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS       "cssè¡¥å…¨
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags      "xmlè¡¥å…¨
+
+"====================tags==================
 set tags=tags 
 set autochdir
+
+"set list lcs=tab:\Â¦\       "vim listæ¨¡å¼ä¸‹å°†tabæ˜¾ç¤ºæˆ|åŠ ç©ºæ ¼çš„æ ·å­
+"=================================å¯¹é½çº¿===================================
+nmap <leader>il :IndentLinesToggle<CR>
+
+" è®¾ç½®Gvimçš„å¯¹é½çº¿æ ·å¼
+if g:isGUI
+    let g:indentLine_char = "â”Š"
+    let g:indentLine_first_char = "â”Š"
+endif
+
+" è®¾ç½®ç»ˆç«¯å¯¹é½çº¿é¢œè‰²
+let g:indentLine_color_term = 239
+
+" è®¾ç½® GUI å¯¹é½çº¿é¢œè‰²
+let g:indentLine_color_gui = '#A4E57E'
+
+"================================airline powerline=============================
+set nocompatible
+set t_Co=256
+let g:Powerline_symbols = 'fancy'
+
+let g:airline_theme="luna"
+let g:airline_powerline_fonts=1
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+"================================airline weather================================
+let g:weather#area = 'beijing,china'
+let g:weather#appid = '44db6a862fba0b067b1930da0d769e98'
+let g:weather#cache_file = '$Vim/vimfiles/cache/weather.tmp'
+
+"=================================background é€æ˜=================================
+au GUIEnter * call libcallnr("vimtweak.dll", "SetAlpha", 225)
+
+if (g:iswindows && g:isGUI)
+    let g:Current_Alpha = 225
+    let g:Top_Most = 0
+    func! Alpha_add()
+        let g:Current_Alpha = g:Current_Alpha + 10
+        if g:Current_Alpha > 255
+            let g:Current_Alpha = 255
+        endif
+        call libcallnr("vimtweak.dll","SetAlpha",g:Current_Alpha)
+    endfunc
+    func! Alpha_sub()
+        let g:Current_Alpha = g:Current_Alpha - 10
+        if g:Current_Alpha < 155
+            let g:Current_Alpha = 155
+        endif
+        call libcallnr("vimtweak.dll","SetAlpha",g:Current_Alpha)
+    endfunc
+    func! Top_window()
+        if  g:Top_Most == 0
+            call libcallnr("vimtweak.dll","EnableTopMost",1)
+            let g:Top_Most = 1
+        else
+            call libcallnr("vimtweak.dll","EnableTopMost",0)
+            let g:Top_Most = 0
+        endif
+    endfunc
+    "å¿«æ·é”®è®¾ç½®
+    map <s-k> :call Alpha_add()<cr>
+    map <s-j> :call Alpha_sub()<cr>
+    map <leader>t :call Top_window()<cr>
+endif
+
+"================================ç•ªèŒ„æ—¶é—´ç®¡ç†===========================
+let g:tomato#interval = 60 * 60 
+let g:tomato#rest_time = 20 * 60 
+let g:tomato#lang = 'chinese' 
+let g:tomato#remind = "â˜»" 
+let g:tomato#reminfo = "â˜º" 
+let g:tomato#show_clock = 1
+let g:tomato#auto_reset_num = 24
+"let g:tomato#show_count_down = 1
+
+"===============================æ‹¬å·é«˜äº®================================
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
