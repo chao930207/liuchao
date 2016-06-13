@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wings - 世界有你，精彩无限</title>
+
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/bootstrap-material-design/0.5.9/css/bootstrap-material-design.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/bootstrap-material-design/0.5.9/css/ripples.min.css" rel="stylesheet">
+
+    <style type="text/css">
+        html body {
+            padding: 0;
+            margin: 0;
+        }
+        .headroom {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            transition: all .8s ease-in-out;
+        }
+        .headroom--unpinned {
+            top: -100px;
+        }
+        .headroom--pinned {
+            top: 0;
+        }
+        .navbar {
+            z-index : 1;
+        }
+            input {
+                background-color : transparent;
+                border : 2px solid rgba(255, 255, 255, .3);
+                height : 30px;
+                box-shadow : 0 0 6px #ddd;
+                margin : .5em;
+                padding : .3em 1em;
+                font-size : 14px;
+                transition : border-color linear .15s, box-shadow linear .15s;
+            }
+            input:focus {
+                border : 2px solid #aaa;
+                outline : none;
+            }
+            button:focus {
+                border : 0 #aaa;
+                outline : none;
+            }
+            button {
+                height : 35px;
+                border : 0;
+                background-color : #2ae0c8;
+                box-shadow : 0 0 3px #adc;
+                padding : .5em 1em;
+                font-size : 12px;
+            }
+            .div_locked {
+                position : fixed;
+                background-color : rgba(0, 0, 0, .4);
+                height : 3000px;
+                overflow : hidden;
+                width : 6000px;
+                z-index : 5;
+                transition : opacity linear .35s, background-color linear .35s;
+            }
+            #main_container {
+                width : 80%;
+                max-width : 280px;
+                min-width : 160px;
+                height : 100%;
+                overflow-y : auto;
+                background : #acf6ef;
+                position : fixed;
+                left : -285px;
+                z-index : 10;
+                transition : all .35s ease-in-out;
+            }
+            .div_box_menu {
+                margin : 1em 1.5em 1em 1em;
+                padding : .5em;
+            }
+            .checkbox {
+                z-index : 0;
+            }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse">
+        <!--<div class="container-fuild">-->
+        <div id="body_locked"></div>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a id="test_word" class="navbar-brand" href="javascript:void(0)">LChao</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="javascript:void(0)" id="remove">Remove</a></li>
+                    <li><a href="#" id="myBlog">Load</a></li>
+                </ul>
+                <form class="navbar-form navbar-left">
+                    <div class="form-group label-floating">
+                        <div class="input-group">
+                            <input type="text" id="search-top" class="form-control" placeholder="Search">
+                            <a class="input-group-addon glyphicon glyphicon-search btn" type="button"></a>
+                        </div>
+                    </div>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                    <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Information<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:void(0)">Tips</a></li>
+                        <li><a href="javascript:void(0)">Basic Information</a></li>
+                        <li><a href="javascript:void(0)">Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a href="javascript:void(0)" type="button">Log Out</a></li>
+                    </ul>
+                    </li>
+                </ul>
+            </div>
+        <!--</div>-->
+    </div>
+            <div id="main_container">
+                <div class="div_box_menu">
+                    <input id="test_a">
+                    <input id="test_a">
+                    <input id="test_a">
+                    <input id="test_a">
+                    <input id="test_a">
+                    <input id="test_a">
+                    <input id="test_a">
+                    <input id="test_a">
+                    <input id="test_a">
+                    <input id="test_a">
+                    <input id="test_a">
+                    <input id="test_a">
+                    <input id="test_a">
+                    <input id="test_a">
+                    <input id="test_a">
+                    <input id="test_a">
+                    <input id="test_a">
+                    <input id="test_a">
+                    <input id="test_a">
+                    <input id="test_a">
+                    <input id="test_a">
+                    <input id="test_a">
+                    <input id="test_a" value="11111">
+                    <input id="test_a">
+                    <input id="test_a">
+                </div>
+
+            </div>
+
+    <div class="well jumbotron">
+        <div class="container">
+            <div class="form-group"></div>
+            <h1 class="text-center">Sky</h1>
+            <blockquote class="blockquote-reverse">
+                <p>Just keep your mind open and suck in the experience and if it hurts,it's probably worth it.</p>
+                <footer>只要你畅开心扉去迎接新的生活和经历,哪怕有所疼痛都是值得的! <cite title="Source Title">Come on!</cite></footer>
+            </blockquote>
+            <p><a class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#test-modal">Learn more</a></p>
+        </div>
+    </div>
+
+    <div class="container-fuild">
+        <form class="form-horizontal">
+            <div class="col-md-6">
+                <div id="mybloghihi"></div>
+            </div>
+        </form>
+
+        <div class="container">
+            <div class="col-md-6">
+                <div class="well">
+                    <form class="form-horizontal">
+                        <legend>Information</legend>
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="ownEmail">Email</label>
+                            <div class="col-md-7">
+                                <input type="email" class="form-control" id="ownEmail" placeholder="Email" value="chao930207@gmail.com">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="ownPassword">Password</label>
+                            <div class="col-md-7">
+                                <input type="password" class="form-control" id="ownPassword" placeholder="Password" value="1233">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="ownStatus">Status</label>
+                            <div class="col-md-7"> 
+                                <div class="togglebutton">
+                                    <label>
+                                        <input id="ownStatus" type="checkbox" checked>Open
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="ownRadio1">Sex</label>
+                            <div class="col-md-7">
+                                <div class="radio radio-primary">
+                                    <label>
+                                        <input type="radio" name="ownRadio" id="ownRadio1" value="option1" checked>Man
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="ownRadio" id="ownRadio2" value="option2">Woman
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="ownDate">Data</label>
+                            <div class="col-md-7">
+                                <input id="ownDate" type="date" class="form-control" value="2012-10-21">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="ownCheckbox">Like</label>
+                            <div class="col-md-7">
+                                <div class="checkbox">
+                                    <label>
+                                        <input id="ownCheckbox" type="checkbox">Reading
+                                    </label>
+                                    <label>
+                                        <input id="ownCheckbox" type="checkbox" checked>Running
+                                    </label>
+                                    <label>
+                                        <input id="ownCheckbox" type="checkbox" checked>Gaming
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="ownSelect">Birthday</label>
+                            <div class="col-md-7">
+                                <select id="ownSelect" class="form-control" name="ownSelect">
+                                    <option value="1992">1992</option>
+                                    <option value="1993" selected>1993</option>
+                                    <option value="1994">1994</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="ownSelectA">Address</label>
+                            <div class="col-md-7">
+                                <select id="ownSelectA" multiple="" class="form-control" name="ownSelectA">
+                                    <option value="bj" selected>Beijing</option>
+                                    <option value="sh">Shanghai</option>
+                                    <option value="sz">Shenzhen</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="ownDes">Description</label>
+                            <div class="col-md-7">
+                                <textarea id="ownDes" class="form-control" name="ownDes" rows="3"></textarea>
+                                <span class="help-block">Input your description, please.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-2">
+                                <button type="button" class="btn btn-raised btn-default">Cancel</button>
+                            </div>
+                            <div class="col-md-offset-1 col-md-2">
+                                <button type="button" class="btn btn-raised btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="test-modal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Tips</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Hello, would you want to learn it?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Bye</button>
+                    <button type="button" class="btn btn-primary" onclick="turnToWeiBo()">Ai? Go!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="http://cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap-material-design/0.5.9/js/material.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap-material-design/0.5.9/js/ripples.min.js"></script>
+    <script src="http://cdn.bootcss.com/headroom/0.7.0/headroom.min.js"></script> <!--headroom.js-->
+    <script src="http://cdn.bootcss.com/headroom/0.7.0/jQuery.headroom.min.js"></script> <!--headroom jQuery plugin-->
+
+    <script>
+        $(function() {
+            $.material.init();
+            $(".navbar").headroom();
+
+            $("#myBlog").click(function() {
+                $("#mybloghihi").html("<div class='form-group'><label class='control-label col-md-2' for='hello'>hello</label><div class='col-md-7'><input class='form-control' type='text' id='hello'></div></div>");
+            })
+            $("#remove").click(function() {
+                $("#mybloghihi").empty();
+            })
+        })
+
+        var cvs = $("#body_locked");
+        cvs.click(function() {
+            var exists_class_flag = cvs.hasClass("div_locked");
+            if (exists_class_flag) {
+                cvs.removeClass("div_locked");
+                $("#main_container").css("left", "-285px");
+            }
+        })
+
+        $("#test_word").click(function() {
+            cvs.addClass("div_locked");
+            $("#main_container").css("left", 0);
+        })
+    </script>
+</body>
+</html>
