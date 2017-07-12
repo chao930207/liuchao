@@ -1,4 +1,4 @@
-"============================================================================
+﻿"============================================================================
 "     FileName: _vimrc
 "         Desc: This is LChao's configration
 "       Author: LChao
@@ -85,11 +85,12 @@ filetype on
 set autoindent
 set smartindent
 set tabstop=4
-set shiftwidth=4
 set showmatch
 set cursorline
 set cuc
+set shiftwidth=4
 set expandtab
+autocmd FileType html,javascript,css set shiftwidth=4 | set expandtab
 "set guioptions-=T
 "set guioptions-=m
 set ruler
@@ -98,7 +99,12 @@ set incsearch
 set nowrapscan
 set autochdir
 set magic
+
+"禁止生成临时文件
+set noundofile
 set nobackup
+set noswapfile
+set wildignore=*.un~,*.pyc,*.zip,*.rar,*.dll,*.dmg
 
 "set nofoldenable
 "set foldclose=all
@@ -112,11 +118,11 @@ filetype off
 
 " 此处规定Vundle的路径  
 
-set rtp+=$VIM/vimfiles/bundle/vundle/  
+set rtp+=$VIM/vimfiles/bundle/Vundle.vim/  
 
 call vundle#rc('$VIM/vimfiles/bundle/')  
 
-Bundle 'gmarik/vundle'  
+Bundle 'VundleVim/Vundle.vim'  
 
 " original repos on github  
 
@@ -131,6 +137,8 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'Yggdroot/indentLine'
 Bundle 'tomasr/molokai'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'marijnh/tern_for_vim'
 Bundle 'HTML-AutoCloseTag'
 Bundle 'elzr/vim-json'
 Bundle 'kien/rainbow_parentheses.vim'
@@ -138,12 +146,35 @@ Bundle 'ap/vim-css-color'
 Bundle 'nono/jquery.vim'
 Bundle 'jiangmiao/auto-pairs'
 
+"css3语法高亮
+"Bundle 'hail2u/vim-css3-syntax'
+"html5标签支持
+"Bundle 'othree/html5.vim'
+"强大的文件搜索
+"Bundle 'kien/ctrlp.vim'
+"css的补全
+"Bundle 'rstacruz/vim-ultisnips-css'
+"更好的js语法 锁进支持
+"Bundle "pangloss/vim-javascript"
+"更好的js语法高亮
+"Bundle 'othree/yajs.vim'
+"js各类框架 库的高亮支持
+"Bundle 'othree/javascript-libraries-syntax.vim'
+"格式化js css等
+"Bundle 'maksimr/vim-jsbeautify'
+"git支持
+"Bundle 'Xuyuanp/nerdtree-git-plugin'
+" 更酷的启动界面
+"Bundle 'mhinz/vim-startify'
+
 " vim-scripts repos  
 
 Bundle 'taglist.vim'
+"作者版权等info注释
 Bundle "vim-scripts/AuthorInfo"
 Bundle "vim-scripts/javacomplete"
 Bundle "vim-scripts/javabrowser"
+Bundle "vim-scripts/winmanager"
 
 filetype plugin indent on " required!
 
@@ -158,24 +189,76 @@ imap <F5> <ESC>:call RunCode()<CR>
 vmap <F5> <ESC>:call RunCode()<CR>
 
 "C,C++的调试
-map <F8> :call Debug()<CR>
+"map <F8> :call Debug()<CR>
+
+"==============================Win Manager================================
+"设置界面分割
+let g:winManagerWindowLayout = "NERDTree|TagList"
+"设置winmanager的宽度，默认为25
+let g:winManagerWidth = 38
+"在进入vim时自动打开winmanager
+let g:AutoOpenWinManager = 1
+"定义打开关闭winmanager按键
+nmap <silent> <F8> :WMToggle<cr>
 
 "==============================NERDTree setting===========================
 map <F7> :NERDTree<CR>
 "let NERDTreeWinPos=1
 
-autocmd VimEnter * NERDTree
+"-----------winmanager + start--------------
+let g:NERDTree_title="[NERDTree]"
+function! NERDTree_Start()
+    exe 'NERDTree'
+endfunction
+ 
+function! NERDTree_IsValid()
+	return 1
+endfunction
+"-----------winmanager + end----------------
 
-wincmd w
-autocmd VimEnter * wincmd w
+"autocmd VimEnter * NERDTree
+"wincmd w
+"autocmd VimEnter * wincmd w
 
-let NERDTreeWinSize=25
-
+"let NERDTreeWinSize=25
 let NERDTreeShowLineNumbers=1
-
 let NERDTreeShowBookmarks=1 
-
 let NERDTreeHighlightCursorline=1
+
+"========================进行Tlist的设置=================================
+map <F3> :silent! Tlist<CR>
+
+"-----------winmanager + start--------------
+"let g:Tlist_title="[Tlist]"
+"function! Tlist_Start()
+"    exe 'silent! Tlist'
+"endfunction
+" 
+"function! Tlist_IsValid()
+"    return 1
+"endfunction
+"-----------winmanager + end----------------
+
+let g:tagbar_vertical = 30
+let Tlist_Ctags_Cmd='ctags.exe'
+"把taglist窗口放在屏幕的右侧，缺省在左侧
+let Tlist_Use_Right_Window=1
+" 不同时显示多个文件的 tag ，只显示当前文件的
+let Tlist_Show_One_File=1
+"设置宽度
+"let Tlist_WinWidth=25
+"设置高度
+"let Tlist_WinHeight=35
+"让当前不被编辑的文件的方法列表自动折叠起来 
+let Tlist_File_Fold_Auto_Close=1
+" 如果 taglist 窗口是最后一个窗口，则退出 vim
+let Tlist_Exit_OnlyWindow=1
+let Tlist_Process_File_Always=0
+let Tlist_Inc_Winwidth=0
+"显示taglist菜单
+let Tlist_Show_Menu=1
+"启动vim自动打开
+"let Tlist_Auto_Open=1
 
 "TAB页签
 map <F9> gt
@@ -210,10 +293,10 @@ func Debug()
 
     elseif &filetype == 'java' 
         exec "!javac %" 
-        exec "!jdb %<"
+        exec "!java %<"
+        "exec !jdb %<"
     endif
 endfunc
-
 
 set encoding=utf-8
 
@@ -245,14 +328,14 @@ set go=
 set laststatus=2
 
 "====== :AuthorInfoDetect   自动添加作者、时间等信息，本质是NERD_commenter && authorinfo的结合
-let g:vimrc_author='Liuchao'
-let g:vimrc_email='chao0207@live.com'
-let g:vimrc_homepage='http://weibo.com/chao0207/'
+let g:vimrc_author='LChao'
+let g:vimrc_email='chao930207@gmail.com'
+let g:vimrc_homepage=''
 nmap <F4> :AuthorInfoDetect<cr>
 
 "===========================java设置========================================
 setlocal omnifunc=javacomplete#Complete
-let JavaBrowser_Ctags_Cmd='ctags'
+let JavaBrowser_Ctags_Cmd='ctags.exe'
 let Javabrowser_Use_Icon = 1
 let JavaBrowser_Use_Highlight_Tag = 1
 autocmd Filetype java set omnifunc=javacomplete#Complete
@@ -262,18 +345,6 @@ inoremap <buffer> <C-S-Space> <C-X><C-U><C-P>
 
 autocmd Filetype java inoremap <buffer> . .<C-X><C-O><C-P><Down>
 autocmd Filetype java inoremap <expr> <CR> pumvisible()?"\<C-Y>":"<CR>"
-
-"========================进行Tlist的设置=================================
-map <F3> :silent! Tlist<CR>
-let Tlist_Ctags_Cmd='ctags'
-let Tlist_Use_Right_Window=1
-let Tlist_Show_One_File=0
-let Tlist_WinWidth=25
-let Tlist_File_Fold_Auto_Close=1
-let Tlist_Exit_OnlyWindow=1
-let Tlist_Process_File_Always=0
-let Tlist_Inc_Winwidth=0
-"let Tlist_Auto_Open=1
 
 "=============jquery配色 js等配置=============
 au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
@@ -294,19 +365,30 @@ autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS      "js�
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS       "css补全
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags      "xml补全
 
+"au FileType css setlocal dict+=$VIM/vimfiles/dict/css.dict
+"au FileType javascript setlocal dict+=$VIM/vimfiles/dict/javascript.dict
+"au FileType html setlocal dict+=$VIM/vimfiles/dict/javascript.dict
+"au FileType html setlocal dict+=$VIM/vimfiles/dict/css.dict
+
 "====================tags==================
-set tags=tags 
+map <leader>tg :!ctags -R --languages=java,html,javascript --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
+imap <leader>tg <ESC> :!ctags -R --languages=java,html,javascript --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
+"set tags=E:/Resources/ctags
+set tags=tags;  " ;不能没有
+"set tags+=./tags
 set autochdir
 
 "set list lcs=tab:\¦\       "vim list模式下将tab显示成|加空格的样子
 "=================================对齐线===================================
 nmap <leader>il :IndentLinesToggle<CR>
 
+let g:indentLine_enabled = 1
+
 " 设置Gvim的对齐线样式
-if g:isGUI
-    let g:indentLine_char = "┊"
-    let g:indentLine_first_char = "┊"
-endif
+"if g:isGUI
+"    let g:indentLine_char = ┊"
+"    let g:indentLine_first_char = ┊"
+"endif
 
 " 设置终端对齐线颜色
 let g:indentLine_color_term = 239
@@ -318,6 +400,16 @@ let g:indentLine_color_gui = '#A4E57E'
 set nocompatible
 set t_Co=256
 let g:Powerline_symbols = 'fancy'
+
+"打开tabline功能,方便查看Buffer和切换,省去了minibufexpl插件
+ let g:airline#extensions#tabline#enabled = 1
+ let g:airline#extensions#tabline#buffer_nr_show = 1
+"设置切换Buffer快捷键"
+ nnoremap <C-tab> :bn<CR>
+ nnoremap <C-s-tab> :bp<CR>
+ " 关闭状态显示空白符号计数
+ let g:airline#extensions#whitespace#enabled = 0
+ let g:airline#extensions#whitespace#symbol = '!'
 
 let g:airline_theme="luna"
 let g:airline_powerline_fonts=1
@@ -331,7 +423,7 @@ let g:weather#appid = '44db6a862fba0b067b1930da0d769e98'
 let g:weather#cache_file = '$Vim/vimfiles/cache/weather.tmp'
 
 "=================================background 透明=================================
-au GUIEnter * call libcallnr("vimtweak.dll", "SetAlpha", 225)
+au GUIEnter * call libcallnr("vimtweak.dll", "SetAlpha", 235)
 
 if (g:iswindows && g:isGUI)
     let g:Current_Alpha = 225
@@ -360,8 +452,8 @@ if (g:iswindows && g:isGUI)
         endif
     endfunc
     "快捷键设置
-    map <s-k> :call Alpha_add()<cr>
-    map <s-j> :call Alpha_sub()<cr>
+    map <c-k> :call Alpha_add()<cr>
+    map <c-j> :call Alpha_sub()<cr>
     map <leader>t :call Top_window()<cr>
 endif
 
